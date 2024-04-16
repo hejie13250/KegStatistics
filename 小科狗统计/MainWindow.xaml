@@ -21,6 +21,107 @@
   WindowStyle="None"
   mc:Ignorable="d">
   <Window.Resources>
+
+    <Style x:Key="RoundedToggleButton" TargetType="ToggleButton">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="10,5" />
+      <Setter Property="Margin" Value="5" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ToggleButton">
+            <Border
+              Background="{TemplateBinding Background}"
+              BorderBrush="Gray"
+              BorderThickness="0"
+              CornerRadius="11">
+              <ContentPresenter
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="{TemplateBinding Content}" />
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="RoundComboBox" TargetType="{x:Type ComboBox}">
+      <Setter Property="Background" Value="White" />
+      <Setter Property="BorderBrush" Value="DarkGray" />
+      <Setter Property="BorderThickness" Value="2" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="Padding" Value="2" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type ComboBox}">
+            <Border
+              Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}"
+              CornerRadius="6">
+              <Grid>
+                <ToggleButton
+                  Name="ToggleButton"
+                  Height="24"
+                  Margin="0,0,0,-4"
+                  Padding="0,0,0,0"
+                  HorizontalContentAlignment="Right"
+                  Background="Transparent"
+                  ClickMode="Press"
+                  Focusable="false"
+                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                  Style="{StaticResource RoundedToggleButton}" />
+                <ContentPresenter
+                  Name="ContentSite"
+                  Margin="3"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Content="{TemplateBinding SelectionBoxItem}"
+                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                  IsHitTestVisible="False" />
+
+                <TextBox
+                  x:Name="PART_EditableTextBox"
+                  Margin="8,0,16,0"
+                  VerticalAlignment="Bottom"
+                  Background="Transparent"
+                  Focusable="True"
+                  IsReadOnly="{TemplateBinding IsReadOnly}"
+                  Visibility="Hidden" />
+
+                <Popup
+                  Name="Popup"
+                  AllowsTransparency="True"
+                  Focusable="False"
+                  IsOpen="{TemplateBinding IsDropDownOpen}"
+                  Placement="Bottom"
+                  PopupAnimation="Slide">
+                  <Grid
+                    Name="DropDown"
+                    MinWidth="{TemplateBinding ActualWidth}"
+                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                    SnapsToDevicePixels="True">
+                    <Border
+                      x:Name="DropDownBorder"
+                      Background="White"
+                      BorderBrush="DarkGray"
+                      BorderThickness="2"
+                      CornerRadius="6" />
+                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                      <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                    </ScrollViewer>
+                  </Grid>
+                </Popup>
+              </Grid>
+            </Border>
+
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
     <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
       <Setter Property="FocusVisualStyle">
         <Setter.Value>
@@ -312,7 +413,7 @@
       <ColumnDefinition Width="150" />
       <ColumnDefinition />
     </Grid.ColumnDefinitions>
-    <Grid Background="Black">
+    <Grid Background="#FFF2F2F2">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="50" />
@@ -322,7 +423,6 @@
           <TextBlock
             Margin="15,15,0,20"
             FontSize="13"
-            Foreground="#8F8F8F"
             Text="小科狗打字统计" />
         </StackPanel>
 
@@ -337,7 +437,6 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Center"
               FontSize="18"
-              Foreground="#8F8F8F"
               Text="今日数据" />
             <Grid Margin="10,0,10,0" HorizontalAlignment="Right">
               <Grid.RowDefinitions>
@@ -357,7 +456,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="字数：" />
               <TextBlock
                 Grid.Row="1"
@@ -366,7 +464,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="击键：" />
               <TextBlock
                 Grid.Row="2"
@@ -375,7 +472,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="上屏：" />
               <TextBlock
                 Grid.Row="3"
@@ -384,7 +480,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="时长：" />
               <TextBlock
                 Grid.Row="4"
@@ -393,7 +488,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="速度" />
               <TextBlock
                 Grid.Row="5"
@@ -402,7 +496,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="码长：" />
               <TextBlock
                 x:Name="zsTextBlock"
@@ -411,7 +504,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="315" />
               <TextBlock
                 x:Name="jjTextBlock"
@@ -422,7 +514,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="681" />
               <TextBlock
                 x:Name="spTextBlock"
@@ -433,7 +524,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="268" />
               <TextBlock
                 x:Name="scTextBlock"
@@ -444,7 +534,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="356" />
               <TextBlock
                 x:Name="sdTextBlock"
@@ -455,7 +544,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="95.5" />
               <TextBlock
                 x:Name="mcTextBlock"
@@ -466,7 +554,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="3.1" />
 
 
@@ -481,7 +568,6 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Center"
               FontSize="18"
-              Foreground="#8F8F8F"
               Text="累计数据" />
             <Grid Margin="10,0,10,0" HorizontalAlignment="Right">
               <Grid.RowDefinitions>
@@ -504,7 +590,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="字数：" />
               <TextBlock
                 Grid.Row="1"
@@ -513,7 +598,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="击键：" />
               <TextBlock
                 Grid.Row="2"
@@ -522,7 +606,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="上屏：" />
               <TextBlock
                 Grid.Row="3"
@@ -531,7 +614,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="时长：" />
               <TextBlock
                 Grid.Row="4"
@@ -540,7 +622,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="速度" />
               <TextBlock
                 Grid.Row="5"
@@ -549,7 +630,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="码长：" />
               <TextBlock
                 x:Name="ljzsTextBlock"
@@ -560,7 +640,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="268" />
               <TextBlock
                 x:Name="ljjjTextBlock"
@@ -571,7 +650,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="356" />
               <TextBlock
                 x:Name="ljspTextBlock"
@@ -582,7 +660,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="268" />
               <TextBlock
                 x:Name="ljscTextBlock"
@@ -593,7 +670,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="356" />
               <TextBlock
                 x:Name="ljsdTextBlock"
@@ -604,7 +680,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="95.5" />
               <TextBlock
                 x:Name="ljmcTextBlock"
@@ -615,7 +690,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="3.1" />
 
 
@@ -634,7 +708,6 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Center"
               FontSize="18"
-              Foreground="#8F8F8F"
               Text="数据选择" />
             <Grid Margin="10,0,10,0" HorizontalAlignment="Right">
               <Grid.RowDefinitions>
@@ -664,7 +737,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="打字数：" />
               <TextBlock
                 Grid.Row="1"
@@ -673,7 +745,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="击键数：" />
               <TextBlock
                 Grid.Row="2"
@@ -682,7 +753,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="上屏数：" />
               <TextBlock
                 Grid.Row="3"
@@ -691,7 +761,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="用时长：" />
               <TextBlock
                 Grid.Row="4"
@@ -700,7 +769,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="平均速度" />
               <TextBlock
                 Grid.Row="5"
@@ -709,14 +777,12 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="平均码长：" />
               <CheckBox
                 x:Name="DZcheckBox"
                 Grid.Column="1"
                 HorizontalAlignment="Right"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 IsChecked="False"
                 Style="{DynamicResource CheckBoxStyle}" />
               <CheckBox
@@ -726,7 +792,6 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Style="{DynamicResource CheckBoxStyle}" />
               <CheckBox
                 x:Name="SPcheckBox"
@@ -734,7 +799,6 @@
                 Grid.Column="1"
                 HorizontalAlignment="Right"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Style="{DynamicResource CheckBoxStyle}" />
               <CheckBox
                 x:Name="SCcheckBox"
@@ -742,7 +806,6 @@
                 Grid.Column="1"
                 HorizontalAlignment="Right"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Style="{DynamicResource CheckBoxStyle}" />
               <CheckBox
                 x:Name="SDcheckBox"
@@ -750,7 +813,6 @@
                 Grid.Column="1"
                 HorizontalAlignment="Right"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Style="{DynamicResource CheckBoxStyle}" />
               <CheckBox
                 x:Name="MCcheckBox"
@@ -758,7 +820,6 @@
                 Grid.Column="1"
                 HorizontalAlignment="Right"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Style="{DynamicResource CheckBoxStyle}" />
 
 
@@ -776,7 +837,6 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Center"
               FontSize="18"
-              Foreground="#8F8F8F"
               Text="数据调整" />
             <Grid Margin="10,0,10,0" HorizontalAlignment="Right">
               <Grid.RowDefinitions>
@@ -796,7 +856,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="倒序：" />
 
               <TextBlock
@@ -806,7 +865,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="系数：" />
               <TextBlock
                 Grid.Row="2"
@@ -815,7 +873,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Text="范围：" />
               <CheckBox
                 x:Name="RQcheckBox"
@@ -824,14 +881,13 @@
                 Grid.Column="1"
                 HorizontalAlignment="Right"
                 FontSize="14"
-                Foreground="#8F8F8F"
                 Style="{DynamicResource CheckBoxStyle}" />
               <local:NumericUpDown
                 x:Name="nud"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="62"
-                Height="18"
+                Height="20"
                 Margin="0,0,-5,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
@@ -846,10 +902,12 @@
                 Grid.RowSpan="2"
                 Grid.Column="1"
                 Width="65"
-                Height="21"
+                Height="auto"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                SelectedIndex="0">
+                SelectedIndex="0"
+                Style="{DynamicResource RoundComboBox}"
+                        Margin="0,3,0,0">
                 <ComboBoxItem Content="15 天" />
                 <ComboBoxItem Content="30 天" />
                 <ComboBoxItem Content="60 天" />

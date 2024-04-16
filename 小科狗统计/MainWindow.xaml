@@ -905,7 +905,6 @@
                 Height="auto"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                SelectedIndex="0"
                 Style="{DynamicResource RoundComboBox}"
                         Margin="0,3,0,0">
                 <ComboBoxItem Content="15 天" />
@@ -917,6 +916,7 @@
                 <ComboBoxItem Content="一年" />
                 <ComboBoxItem Content="两年" />
                 <ComboBoxItem Content="全部" />
+
               </ComboBox>
             </Grid>
 

@@ -271,11 +271,8 @@ namespace 小科狗统计
       else
       {
         int startIndex;
-        int count = ts;
-        if ((bool)RQcheckBox.IsChecked)
-          startIndex = 0;
-        else
-          startIndex = matches.Count - ts;
+        int count  = matches.Count > 15 ? ts : matches.Count;
+        startIndex = matches.Count > 15 ? matches.Count - ts : 0;
 
         数据片段.日期 = 全部数据.日期.Skip(startIndex).Take(count).ToArray(); ;
         数据片段.字数 = 全部数据.字数.Skip(startIndex).Take(count).ToArray(); ;

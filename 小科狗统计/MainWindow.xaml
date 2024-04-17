@@ -456,7 +456,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Text="字数：" />
+                Text="击键：" />
               <TextBlock
                 Grid.Row="1"
                 Height="20"
@@ -464,7 +464,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Text="击键：" />
+                Text="字数：" />
               <TextBlock
                 Grid.Row="2"
                 Height="20"
@@ -498,16 +498,7 @@
                 FontSize="14"
                 Text="码长：" />
               <TextBlock
-                x:Name="zsTextBlock"
-                Grid.Column="1"
-                Height="20"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontSize="14"
-                Text="315" />
-              <TextBlock
                 x:Name="jjTextBlock"
-                Grid.Row="1"
                 Grid.Column="1"
                 Height="20"
                 Margin="0,1,0,0"
@@ -515,6 +506,16 @@
                 VerticalAlignment="Center"
                 FontSize="14"
                 Text="681" />
+              <TextBlock
+                x:Name="zsTextBlock"
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="14"
+                Text="315" />
+
               <TextBlock
                 x:Name="spTextBlock"
                 Grid.Row="2"
@@ -590,7 +591,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Text="字数：" />
+                Text="击键：" />
               <TextBlock
                 Grid.Row="1"
                 Height="20"
@@ -598,7 +599,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Text="击键：" />
+                Text="字数：" />
               <TextBlock
                 Grid.Row="2"
                 Height="20"
@@ -633,7 +634,7 @@
                 Text="码长：" />
               <TextBlock
                 x:Name="ljzsTextBlock"
-                Grid.Row="0"
+                Grid.Row="1"
                 Grid.Column="1"
                 Height="20"
                 Margin="0,1,0,0"
@@ -643,7 +644,6 @@
                 Text="268" />
               <TextBlock
                 x:Name="ljjjTextBlock"
-                Grid.Row="1"
                 Grid.Column="1"
                 Height="20"
                 Margin="0,1,0,0"
@@ -737,7 +737,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Text="打字数：" />
+                Text="击键数：" />
               <TextBlock
                 Grid.Row="1"
                 Height="20"
@@ -745,7 +745,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Text="击键数：" />
+                Text="打字数：" />
               <TextBlock
                 Grid.Row="2"
                 Height="20"
@@ -903,10 +903,10 @@
                 Grid.Column="1"
                 Width="65"
                 Height="auto"
+                Margin="0,3,0,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Style="{DynamicResource RoundComboBox}"
-                        Margin="0,3,0,0">
+                Style="{DynamicResource RoundComboBox}">
                 <ComboBoxItem Content="15 天" />
                 <ComboBoxItem Content="30 天" />
                 <ComboBoxItem Content="60 天" />

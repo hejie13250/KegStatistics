@@ -1,32 +1,18 @@
 ﻿using LiveChartsCore;
-using LiveChartsCore.Kernel;
-using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.Painting.Effects;
-using LiveChartsCore.SkiaSharpView.SKCharts;
 using SkiaSharp;
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using LiveChartsCore.SkiaSharpView.Drawing;
-using System;
-using System.IO;
-using System.Reflection;
-using LiveChartsCore.Drawing;
-using System.Windows.Controls.Primitives;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading;
 
 
 

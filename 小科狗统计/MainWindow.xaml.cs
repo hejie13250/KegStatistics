@@ -78,7 +78,6 @@ namespace 小科狗统计
     // 读配置项
     private void ReadConfig()
     {
-      settingConfigFile = appPath + "\\窗口配置.ini";
       DZcheckBox.IsChecked = GetValue("dzsjtj", "dz") == "1";
       JJcheckBox.IsChecked = GetValue("dzsjtj", "jj") == "1";
       SPcheckBox.IsChecked = GetValue("dzsjtj", "sp") == "1";
@@ -122,14 +121,16 @@ namespace 小科狗统计
     ViewModel viewModel = new();
     MatchCollection matches;
 
-    readonly string appPath = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-    string settingConfigFile = "窗口配置.ini";  // 窗口配置文件
+    readonly string appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+    readonly string settingConfigFile;  // 窗口配置文件
     int ts = 0;
 
 
     [Obsolete]
     public MainWindow()
     {
+      if (!Directory.Exists($"{appPath}\\configs")) Directory.CreateDirectory($"{appPath}\\configs");
+      settingConfigFile = $"{appPath}\\configs\\窗口配置.ini";
       InitializeComponent();
       DZcheckBox.Click += CheckBox_Click;
       JJcheckBox.Click += CheckBox_Click;
